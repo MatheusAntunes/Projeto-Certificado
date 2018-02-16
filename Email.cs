@@ -42,7 +42,7 @@ namespace WindowsFormsApplication8
 
             if (EnviarEmail())
             {
-                MessageBox.Show("E-mail enviado com sucesso, seu certificado vence em menos de 10 dias.");
+                MessageBox.Show("E-mail enviado com sucesso");
                 
             }
             else
