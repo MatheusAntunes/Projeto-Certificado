@@ -13,7 +13,7 @@ namespace WindowsFormsApplication11
 {
     public partial class Form2 : Form
     {
-        string x;
+       
         public Form2()
         {
             InitializeComponent();
@@ -31,6 +31,11 @@ namespace WindowsFormsApplication11
             Email email = new Email(txtEmail.Text);
             email.EnviarEmail();
             Application.Exit();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            Close();
         }
     }
 }

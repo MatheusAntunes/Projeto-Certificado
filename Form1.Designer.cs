@@ -40,11 +40,12 @@
             this.label5 = new System.Windows.Forms.Label();
             this.txtSenha = new System.Windows.Forms.TextBox();
             this.btt_Search = new System.Windows.Forms.Button();
+            this.bttSair = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // bttEnviar
             // 
-            this.bttEnviar.Location = new System.Drawing.Point(183, 297);
+            this.bttEnviar.Location = new System.Drawing.Point(105, 298);
             this.bttEnviar.Name = "bttEnviar";
             this.bttEnviar.Size = new System.Drawing.Size(75, 23);
             this.bttEnviar.TabIndex = 0;
@@ -98,7 +99,7 @@
             // 
             // DayExp
             // 
-            this.DayExp.Location = new System.Drawing.Point(12, 262);
+            this.DayExp.Location = new System.Drawing.Point(12, 246);
             this.DayExp.Name = "DayExp";
             this.DayExp.Size = new System.Drawing.Size(114, 20);
             this.DayExp.TabIndex = 7;
@@ -110,7 +111,7 @@
             this.txtCaminho.Name = "txtCaminho";
             this.txtCaminho.Size = new System.Drawing.Size(246, 20);
             this.txtCaminho.TabIndex = 9;
-            this.txtCaminho.TextChanged += new System.EventHandler(this.txtCaminho_TextChanged);
+            this.txtCaminho.TextChanged += new System.EventHandler(this.txtCaminho_TextChanged );
             // 
             // label4
             // 
@@ -136,7 +137,8 @@
             this.txtSenha.Name = "txtSenha";
             this.txtSenha.Size = new System.Drawing.Size(114, 20);
             this.txtSenha.TabIndex = 11;
-            this.txtSenha.TextChanged += new System.EventHandler(this.txtSenha_TextChanged);
+            this.txtSenha.UseSystemPasswordChar = true;
+            this.txtSenha.Validating += new System.ComponentModel.CancelEventHandler(this.txtSenha_LostFocus);
             // 
             // btt_Search
             // 
@@ -148,11 +150,22 @@
             this.btt_Search.UseVisualStyleBackColor = true;
             this.btt_Search.Click += new System.EventHandler(this.btt_Search_Click);
             // 
+            // bttSair
+            // 
+            this.bttSair.Location = new System.Drawing.Point(221, 298);
+            this.bttSair.Name = "bttSair";
+            this.bttSair.Size = new System.Drawing.Size(75, 23);
+            this.bttSair.TabIndex = 13;
+            this.bttSair.Text = "SAIR";
+            this.bttSair.UseVisualStyleBackColor = true;
+            this.bttSair.Click += new System.EventHandler(this.bttSair_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(389, 352);
+            this.Controls.Add(this.bttSair);
             this.Controls.Add(this.btt_Search);
             this.Controls.Add(this.txtSenha);
             this.Controls.Add(this.label5);
@@ -186,6 +199,7 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.TextBox txtSenha;
         private System.Windows.Forms.Button btt_Search;
+        private System.Windows.Forms.Button bttSair;
     }
 }
 

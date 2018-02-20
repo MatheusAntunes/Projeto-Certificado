@@ -9,19 +9,19 @@ namespace WindowsFormsApplication11
 {
     public class Certificate
     {
-        private X509Certificate2 certificado;
+        public X509Certificate2 certificado1;
         
 
         public Certificate(string caminho, string senha)
-        {            
-           certificado =new X509Certificate2(caminho, senha);
+        {
+                certificado1 = new X509Certificate2(caminho, senha);
+            
         }
          
-
         public DateTime getDateCertificate()
         {
-            //return Convert.ToDateTime(certificado.GetExpirationDateString());
-            return Convert.ToDateTime("18/02/2018");
+            return Convert.ToDateTime(certificado1.GetExpirationDateString());
+            //return Convert.ToDateTime("18/02/2018");
         }
         
                
@@ -35,12 +35,6 @@ namespace WindowsFormsApplication11
             return getDateCertificate().Subtract(GetDatePC()).Days.ToString();
         }
 
-        public String SerialNumber()
-        {          
-           var certificate = new X509Certificate2("C:\\Users\\Matheus Antunes\\Desktop\\certificado\\EIT TECHNOLOGIES CONSULTORIA DE INFORMATICA LTDA12349468000175.pfx", "3-17Tech");
-           var serial = certificate.GetSerialNumber();
-           return Convert.ToString(serial);
-        }
-          
+        
     }
 }

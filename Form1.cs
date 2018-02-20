@@ -1,15 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.IO;
-using System.Linq;
-using System.Net.Mail;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using WindowsFormsApplication8;
+using System.Security.Cryptography.X509Certificates;
+
 
 namespace WindowsFormsApplication11
 {
@@ -20,7 +12,6 @@ namespace WindowsFormsApplication11
 
         public Form1()
         {
-
             InitializeComponent();
         }
 
@@ -28,32 +19,45 @@ namespace WindowsFormsApplication11
         {
             throw new NotImplementedException();
         }
-
+        
         private void bttEnviar_Click(object sender, EventArgs e)
         {
 
-            Certificate certificate = new Certificate(txtCaminho.Text, txtSenha.Text);
+            if (!string.IsNullOrEmpty(txtCaminho.Text) && !string.IsNullOrEmpty(txtSenha.Text))
+            {
+
+                Certificate certificate = new Certificate(txtCaminho.Text, txtSenha.Text);
+
+                DateCertificate.Text = Convert.ToString(certificate.getDateCertificate());
+                DateNow.Text = Convert.ToString(certificate.GetDatePC());
+                DayExp.Text = Convert.ToString(certificate.DaysExpire());
+
+                //Condições para o disparo de e-mail.
+
+                if (Convert.ToInt16(certificate.DaysExpire()) <= 10)
+                {
+
+                    Form2 tela = new Form2();
+                    tela.Show();
+
+                }
+                else
+                {
+                    MessageBox.Show("ATENÇÃO !!! Seu certificado vence em : " + certificate.DaysExpire() + "dias.");
+                    Application.Exit();
+                }
 
 
-            DateCertificate.Text = Convert.ToString(certificate.getDateCertificate());
-            DateNow.Text = Convert.ToString(certificate.GetDatePC());
-            DayExp.Text = Convert.ToString(certificate.DaysExpire());
-
-            //Condições para o disparo de e-mail.
-
-            if (Convert.ToInt32(certificate.DaysExpire()) <= 10) {
-
-                Form2 tela = new Form2();
-                tela.Show();
+            }else
+            {
+                MessageBox.Show("Verifique se os campo Caminho e Senha estão preeenchidos");
                 
             }
-            else
-            {
-                MessageBox.Show("ATENÇÃO !!! Seu certificado vence em : " + certificate.DaysExpire() + "dias.");
-                Application.Exit();
-            }
-          
 
+
+            
+                
+                
         }
 
         private void DateNow_TextChanged(object sender, EventArgs e)
@@ -86,17 +90,38 @@ namespace WindowsFormsApplication11
 
         }
 
-        private void txtSenha_TextChanged(object sender, EventArgs e)
+        private void txtSenha_LostFocus(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            txtSenha.PasswordChar = '*';
+
+
+            if (!string.IsNullOrEmpty(txtSenha.Text)) 
+            {
+                
+                try 
+                {
+                    
+                    var certificado1 = new X509Certificate2(txtCaminho.Text, txtSenha.Text);
+
+                }
+                catch
+                {
+
+                    MessageBox.Show("Senha invalida digite novamente");
+                    txtSenha.Clear();
+
+
+                }
+
+
+            }
 
         }
 
+
+
         private void btt_Search_Click(object sender, EventArgs e)
         {
-
-            Stream myStream = null;
-
+            
             OpenFileDialog open = new OpenFileDialog();
             open.InitialDirectory = "c: \\";
             open.Filter = "arquivos txt (* .txt) | * .txt | Todos os arquivos (*. *) | *. *";
@@ -123,6 +148,11 @@ namespace WindowsFormsApplication11
 
 
 
+        }
+
+        private void bttSair_Click(object sender, EventArgs e)
+        {
+            Close();
         }
     }
 }
