@@ -21,7 +21,7 @@ namespace WindowsFormsApplication11
         public DateTime getDateCertificate()
         {
             return Convert.ToDateTime(certificado1.GetExpirationDateString());
-            //return Convert.ToDateTime("18/02/2018");
+            //return Convert.ToDateTime("27/02/2019");
         }
         
                
